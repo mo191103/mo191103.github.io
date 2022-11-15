@@ -20,17 +20,17 @@ var configs = (function () {
         cesar_help:"",
         facture:"Belle trouvaille.\nEh merde...\nIl a approché MO via Leboncoin... On sait qu'ils avaient rendez-vous sur le parking d'auchan. Heureusement, on a réussi à trouver une photo de sa voiture en sortant du parking ! \nNous devons contacter un garagiste, envoyez nous la date de mise en circulation de son véhicule pour que l'on puisse obtenir plus d'informations. Entrez la au format **/**/****",
         facture_help:"",
-        step3 : "Vous avancez particulièrement vite, On a creusé ce que vous nous avez donné.\nElle était visiblement admiratrice de Martin Luther King. On a trouvé un blog qu'elle aurait fait recémment. Une copie est disponible ici :\n https://mo191103.github.io/MLK_blog/\nContinuez d'enquêter",
+        step3 : "Vous avancez particulièrement vite. Hop, votre premier cadeau est débloqué.\n On a creusé ce que vous nous avez donné.\nElle était visiblement admiratrice de Martin Luther King. On a trouvé un blog qu'elle aurait fait recémment. Une copie est disponible ici :\n https://mo191103.github.io/MLK_blog/\nContinuez d'enquêter",
         step3_help : "",
         lodeve : "Bien joué... MO aimait donc plutôt bien les legos... Interréssant mais ca ne nous aide pas beaucoup. On est en panne d'infos.\nElle doit bien avoir quelquechose quelque part sur elle. Trouvez une quelconque info à propos d'une rencontre avec Rémy. Nous pourrons peut-être en tirer quelquechose.",
         lodeve_help : "",
-        dix_aout_04 : "Bingo ! Vous êtes vraiment douée !\nOn se rapproche de lui ... \nInterressant... La carte grise de son véhicule est au nom sa copine, Emma Roy.\n\nElle doit bien être sur les réseau sociaux.\nEntrez le nom du réseau social_son nom d'utilisateur\nExemple : facebook_jean.dupont",
+        dix_aout_04 : "Bingo ! Vous êtes vraiment douée !\nOn se rapproche de lui ...\nJ'ai l'impression qu'un deuxième cadeau vient d'être débloqué \nInterressant... La carte grise de son véhicule est au nom sa copine, Emma Roy.\n\nElle doit bien être sur les réseau sociaux.\nEntrez le nom du réseau social_son nom d'utilisateur\nExemple : facebook_jean.dupont",
         dix_aout_04_help : "",
-        instagram:"Bonne piste !\nVous avez trouvé !\nSortons les vrais outils.\nJe vous présente Epieos (https://epieos.com/)\nEn entrant le mail d'Emma vous allez pouvoir accéder pas mal d'infos sur elle.\nVous devriez être en mesure de voir l'activité de son compte google...\nEntrez le nom du village où ils ont passés la nuit le soir de l'enlèvement.\nS'il comporte un trait d'union, gardez le.\nExemple : saint-nectaire", 
+        instagram:"Bonne piste !\nVous avez trouvé !\nBon... Nous avons pu nous procurer cette capture d'écran. Certaines informations sont manquantes mais vous devriez pouvoir retrouver ce qu'il nous faut.\nEntrez le nom du village où ils ont passés la nuit le soir de l'enlèvement.\nS'il comporte un trait d'union, gardez le.\nExemple : saint-nectaire", 
         instagram_help:"",
         christol : "Félicitations... On  touche au but, Rémy se trouve donc a Saint-Christol... Trouvez ce que cache ce charmant village. Envoyez nous l'altitude du lieu secret ou pourrait être retenue MO en mètres.\nAvec une carte IGN nous pourrons déterminer où se trouve MO.\nBon courage pour l'épreuve finale !",
         christol_help : "",
-        last :" Wow ! Impressionnant... Je suis bluffé par votre professionalisme...\nVous venez tout simple de ... sauver l'humanité. Après un RAID de nos équipes, MO a été retrouvé saine et sauve... L'entreprise de rémy collaborait avec la DGSE pour aggraver le réchauffement climatique...\nRien a dire... Vous excellez dans votre domaine.\nLe monde vous remercie\nA bientôt.\n*fin de transmission*",
+        last :" Wow ! Impressionnant... Je suis bluffé par votre professionalisme...\nVous venez tout simple de ... sauver l'humanité. Après un RAID de nos équipes, MO a été retrouvé saine et sauve... L'entreprise de rémy collaborait avec la DGSE pour aggraver le réchauffement climatique...\nRien a dire... Vous excellez dans votre domaine.\nCadeau 3/3 débloqué.\nLe monde vous remercie\nA bientôt.\n*fin de transmission*",
         last_help :"",
         cat_help: "Voir le contenu d'un fichier. cat <nom du fichier>",
         help_help: "Afficher ce menu.",
@@ -317,7 +317,6 @@ var main = (function () {
     Terminal.prototype.cat = function (cmdComponents) {
         var result;
         lastCommand = cmds.CAT.value;
-        console.log(lastCommand);
         if (cmdComponents.length <= 1) {
             result = configs.getInstance().usage + ": " + cmds.CAT.value + " <" + configs.getInstance().file + ">";
         } else if (!cmdComponents[1] || (!cmdComponents[1] === configs.getInstance().welcome_file_name || !files.getInstance().hasOwnProperty(cmdComponents[1]))) {
@@ -375,6 +374,7 @@ var main = (function () {
     };
     Terminal.prototype.instagram = function () {
         lastCommand = cmds.INSTAGRAM.value;
+        console.log(lastCommand);
         var result = "" + configs.getInstance().instagram + "\n";
  
         this.type(result, this.unlock.bind(this));
@@ -476,6 +476,9 @@ var main = (function () {
             if (i < text.length) {
                 if(i===text.length-1 && lastCommand==="facture") {
                     document.getElementById("output").innerHTML+="<br><br><img src='camera.png' height='650px' width='950px'>";
+
+                }if(i===text.length-1 && lastCommand==="instagram_emma.roy__"){
+                    document.getElementById("output").innerHTML+="<br><br><img src='reviews.jpg' height='650px' width='1200px'>";
 
                 }
                 var char = text.charAt(i);
