@@ -14,6 +14,8 @@ var configs = (function () {
     Singleton.defaultOptions = {
         general_help: "Bah alors on galère ?\nBienvenue dans le menu d'aide.\nVoici les commandes disponibles.",
         ls_help: "Lister tous les fichiers présents dans ce dossier",
+        connard:"Oui bon eh ca va toi aussi parle bien",
+        connard_help: "Afficher l'aide",
         sors_moi_de_la_help: "Quitter ce truc et avoir la solution.",
         sors_moi_de_la: "Alors non ? Tu te crois où ?.",
         cesar: "Mizvvgyn 7 mnma 2021 à 00:17\nFfwsbdz, Gz-sovib zfcrr aqgyree KwavaPbdvx uûveao kseeeeoq. Yen létèmm frrsfz li hdaydbé ijc iaéqqxrklr himj ue sdklznr WKO ijc mnnpecuau, em zfds zzbw lwe izzwzxn CYN uln jr ozslee\nczzwfwnrgtidnng ozèw dxcuz uezb oa nimk sazvqw.\nA'ji à gdbvv yeenwrenl ridspé ue qjkydnng zv NGP eg zv TGCX cjcv êkae fpz ul'rl cpqwjn l'bpdvza.\n\nBvzv gfadvvtidnng,\nIqgfuaf.\n\n\n--------------\nQwmo m'uaz oéréijtvjv. ******_******_****, pfas qz ase mifxwyib lr **_****_****\n\nKzstqavim éxrye ? Ezutcjcrm tij ntbdtij yae gm xvgtr zv kradnib pvb \"_\".",
@@ -143,7 +145,8 @@ var main = (function () {
         DIX_AOUT_04: { value: "10/08/2004", help: configs.getInstance().dix_aout_04_help },
         INSTAGRAM: { value: "instagram_emma.roy__", help: configs.getInstance().instagram_help },
         CHRISTOL: { value: "saint-christol", help: configs.getInstance().christol_help },
-        LAST: { value: "833", help: configs.getInstance().christol_help }
+        LAST: { value: "833", help: configs.getInstance().christol_help},
+        CONNARD: { value: "connard", help: configs.getInstance().connard_help }
     };
 
     var Terminal = function (prompt, cmdLine, output, user, host, root, outputTimer) {
@@ -302,6 +305,9 @@ var main = (function () {
             case cmds.HELP.value:
                 this.help();
                 break;
+            case cmds.CONNARD.value:
+                    this.connard();
+                    break;
             case cmds.CLEAR.value:
                 this.clear();
                 break;
@@ -366,6 +372,14 @@ var main = (function () {
         this.type(result, this.unlock.bind(this));
     };
 
+    Terminal.prototype.connard = function () {
+        lastCommand = cmds.CONNARD.value;
+        var result = "" + configs.getInstance().connard + "\n";
+ 
+        this.type(result, this.unlock.bind(this));
+    };
+
+
     Terminal.prototype.step3 = function () {
         lastCommand = cmds.STEP3.value;
         var result = "" + configs.getInstance().step3 + "\n";
@@ -403,7 +417,7 @@ var main = (function () {
         lastCommand = cmds.HELP.value;
         var result = configs.getInstance().general_help + "\n\n";
         for (var cmd in cmds) {
-            if(cmd!=="CESAR" && cmd!=="STEP3" && cmd!=="LODEVE" && cmd!=="FACTURE" && cmd!=="CHRISTOL" && cmd!=="DIX_AOUT_04" && cmd!=="LAST" && cmd!=="INSTAGRAM") {
+            if(cmd!=="CESAR" && cmd!=="STEP3" && cmd!=="LODEVE" && cmd!=="FACTURE" && cmd!=="CHRISTOL" && cmd!=="DIX_AOUT_04" && cmd!=="LAST" && cmd!=="INSTAGRAM" && cmd!=="CONNARD") {
             result += cmds[cmd].value + " - " + cmds[cmd].help + "\n";
             }
             
